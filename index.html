@@ -1,0 +1,1000 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>EduTime</title>
+
+<!-- Font Awesome (أيقونات جاهزة) -->
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+
+<style>
+  :root{
+    --primary: #2d5302;
+    --primary-light: #4a7c1a;
+    --primary-dark: #1f3a01;
+    --accent: #ff9800;
+    --accent-light: #ffb74d;
+    --bg:#f8fbf3;
+    --card:#ffffff;
+    --muted:#5a6c5a;
+    --glass: rgba(255,255,255,0.85);
+    --radius:16px;
+    --shadow: 0 8px 26px rgba(45, 83, 2, 0.12);
+  }
+  *{box-sizing:border-box; margin:0; padding:0}
+  body{
+    font-family:"Noto Naskh Arabic", "Segoe UI", Tahoma, system-ui, Arial;
+    background: var(--bg);
+    color:#1a2c01;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    line-height:1.6;
+    padding-bottom:40px;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%232d5302' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  /* Header Styles */
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    padding: 15px 25px;
+    color: white;
+    box-shadow: 0 4px 20px rgba(45, 83, 2, 0.3);
+    position: relative;
+    border-bottom: 4px solid var(--accent);
+  }
+
+  .logo-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .logo {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    animation: pulse 3s infinite;
+  }
+
+  .logo i {
+    font-size: 32px;
+    color: var(--primary);
+  }
+
+  .header-title {
+    text-align: center;
+    flex: 1;
+  }
+
+  h1 {
+    font-size: 24px;
+    margin: 0;
+    font-weight: 800;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+  }
+
+  .subtitle {
+    font-size: 14px;
+    opacity: 0.9;
+    margin-top: 4px;
+  }
+
+  .about-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 2px solid white;
+    padding: 10px 20px;
+    font-size: 15px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s;
+    backdrop-filter: blur(5px);
+  }
+
+  .about-btn:hover {
+    background: white;
+    color: var(--primary);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  }
+
+  /* Container Styles */
+  .container{
+    max-width:1200px;
+    margin:30px auto;
+    padding:0 20px;
+    display:grid;
+    grid-template-columns:1fr 350px;
+    gap:25px;
+  }
+  
+  @media(max-width:980px){ 
+    .container{
+      grid-template-columns:1fr;
+      padding:0 15px;
+    } 
+    .aside{
+      order:-1;
+    } 
+  }
+
+  /* Card Styles */
+  .card{
+    background:var(--card);
+    border-radius:var(--radius);
+    padding:20px;
+    box-shadow: var(--shadow);
+    border-top: 5px solid var(--primary);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(45, 83, 2, 0.15);
+  }
+  
+  .card h3 {
+    color: var(--primary);
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid rgba(45, 83, 2, 0.1);
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .card h3 i {
+    color: var(--accent);
+  }
+
+  /* Problems List */
+  .problems{
+    display:grid;
+    gap:18px;
+  }
+  
+  .problem{
+    display:flex;
+    gap:15px;
+    align-items:center;
+    padding:18px;
+    border-radius:var(--radius);
+    transition:transform .3s ease, box-shadow .3s ease;
+    cursor:default;
+    border:2px solid rgba(45, 83, 2, 0.1);
+    background:linear-gradient(180deg, rgba(255,255,255,0.9), #fff);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .problem:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 5px;
+    height: 100%;
+    background: var(--primary);
+    transition: width 0.3s ease;
+  }
+  
+  .problem:hover:before {
+    width: 8px;
+  }
+  
+  .problem:hover{
+    transform:translateY(-5px);
+    box-shadow: 0 15px 35px rgba(45, 83, 2, 0.15);
+  }
+  
+  .p-icon{
+    width:70px;
+    height:70px;
+    border-radius:16px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:linear-gradient(135deg, var(--primary), var(--primary-light));
+    color:white;
+    font-size:26px;
+    flex-shrink:0;
+    box-shadow: 0 5px 15px rgba(45, 83, 2, 0.2);
+  }
+  
+  .p-body{
+    flex:1;
+  }
+  
+  .p-title{
+    font-weight:800;
+    margin:0 0 8px;
+    color: var(--primary-dark);
+    font-size: 18px;
+  }
+  
+  .p-summary{
+    margin:0;
+    color:var(--muted);
+    font-size:15px;
+    line-height:1.7;
+  }
+  
+  .p-actions{
+    display:flex;
+    gap:10px;
+    margin-top:15px;
+  }
+
+  /* Buttons */
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background:var(--primary);
+    color:white;
+    padding:10px 16px;
+    border-radius:10px;
+    border:0;
+    cursor:pointer;
+    font-weight:600;
+    transition:all 0.3s;
+    font-size: 14px;
+  }
+  
+  .btn:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(45, 83, 2, 0.3);
+  }
+  
+  .btn.secondary{
+    background:transparent;
+    color:var(--primary);
+    border:2px solid rgba(45, 83, 2, 0.2);
+  }
+  
+  .btn.secondary:hover {
+    background: rgba(45, 83, 2, 0.05);
+    border-color: var(--primary);
+  }
+  
+  .btn-icon{
+    width:44px;
+    height:44px;
+    border-radius:12px;
+    background:var(--accent);
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    color:white;
+    border:0;
+    cursor:pointer;
+    transition: all 0.3s;
+  }
+  
+  .btn-icon:hover {
+    background: var(--accent-light);
+    transform: rotate(10deg) scale(1.1);
+  }
+
+  /* Aside Styles */
+  .aside .persona{
+    display:flex;
+    gap:12px;
+    align-items:center;
+    padding:15px;
+    border-radius:12px;
+    border:2px dashed rgba(45, 83, 2, 0.15);
+    cursor:pointer;
+    margin-bottom:12px;
+    background:linear-gradient(180deg, #fff, #f9fbf3);
+    transition: all 0.3s;
+  }
+  
+  .persona:hover {
+    border-color: var(--primary);
+    transform: translateX(-5px);
+    box-shadow: 0 5px 15px rgba(45, 83, 2, 0.1);
+  }
+  
+  .persona .icon{
+    width:50px;
+    height:50px;
+    border-radius:12px;
+    background:rgba(45, 83, 2, 0.1);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--primary);
+    font-size:22px;
+    transition: all 0.3s;
+  }
+  
+  .persona:hover .icon {
+    background: var(--primary);
+    color: white;
+  }
+  
+  .persona strong{
+    display:block;
+    color: var(--primary-dark);
+    margin-bottom: 3px;
+  }
+  
+  .searchRow{
+    display:flex;
+    gap:10px;
+    margin-top:15px;
+  }
+  
+  .searchRow input{
+    flex:1;
+    padding:12px 15px;
+    border-radius:10px;
+    border:2px solid rgba(45, 83, 2, 0.15);
+    background: #f8fbf3;
+    font-family: inherit;
+    transition: all 0.3s;
+  }
+  
+  .searchRow input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(45, 83, 2, 0.2);
+  }
+
+  /* Modal Styles */
+  .modal{
+    position:fixed;
+    inset:0;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    background:rgba(3,7,18,0.7);
+    z-index:9999;
+    padding:20px;
+    backdrop-filter: blur(5px);
+  }
+  
+  .modal .box{
+    background:var(--card);
+    width:100%;
+    max-width:900px;
+    border-radius:var(--radius);
+    padding:25px;
+    animation:pop .3s ease;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.25);
+    border-top: 5px solid var(--primary);
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+  
+  @keyframes pop{
+    0%{transform:translateY(20px) scale(.95);opacity:0}
+    100%{transform:none;opacity:1}
+  }
+  
+  .modal .box h3{
+    margin:0 0 10px;
+    color: var(--primary);
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .close{
+    background:#f3f6fb;
+    border:0;
+    padding:10px 12px;
+    border-radius:10px;
+    cursor:pointer;
+    transition: all 0.3s;
+  }
+  
+  .close:hover {
+    background: var(--primary);
+    color: white;
+    transform: rotate(90deg);
+  }
+
+  .tips-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+    margin-top:15px;
+  }
+  
+  @media(max-width:700px){ 
+    .tips-grid{
+      grid-template-columns:1fr;
+    } 
+  }
+
+  .tip{
+    padding:15px;
+    border-radius:12px;
+    background:linear-gradient(180deg, #fff, #f9fbf3);
+    border:2px solid rgba(45, 83, 2, 0.1);
+    display:flex;
+    gap:12px;
+    align-items:flex-start;
+    min-height:80px;
+    transition:transform .3s ease, box-shadow .3s ease;
+  }
+  
+  .tip:hover{
+    transform:translateY(-5px);
+    box-shadow: 0 10px 25px rgba(45, 83, 2, 0.1);
+    border-color: var(--primary-light);
+  }
+  
+  .tip .t-icon{
+    width:50px;
+    height:50px;
+    border-radius:12px;
+    background:linear-gradient(135deg, var(--accent), var(--accent-light));
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:white;
+    font-weight:700;
+    flex-shrink: 0;
+  }
+  
+  .tip h4{
+    margin:0;
+    font-size:16px;
+    color: var(--primary-dark);
+  }
+  
+  .tip p{
+    margin:8px 0 0;
+    color:var(--muted);
+    font-size:14px;
+    line-height:1.6;
+  }
+
+  /* Animations */
+  .pulse{
+    animation: pulse 2s infinite;
+  }
+  
+  @keyframes pulse{
+    0%{transform:scale(1)}
+    50%{transform:scale(1.05)}
+    100%{transform:scale(1)}
+  }
+  
+  .fade-in{
+    animation:fadeIn .6s ease both;
+  }
+  
+  @keyframes fadeIn{
+    from{opacity:0; transform:translateY(10px)}
+    to{opacity:1; transform:none}
+  }
+  
+  .bounce {
+    animation: bounce 1s infinite alternate;
+  }
+  
+  @keyframes bounce {
+    from { transform: translateY(0px); }
+    to { transform: translateY(-5px); }
+  }
+
+  /* Footer */
+  footer{
+    max-width:1200px;
+    margin:40px auto 20px;
+    text-align:center;
+    color:var(--muted);
+    font-size:14px;
+    padding:15px;
+    border-top: 2px solid rgba(45, 83, 2, 0.1);
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--primary-light);
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--primary);
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="logo-container">
+    <div class="logo-img">
+      <img src="WhatsApp_Image_2025-09-14_at_6.33.00_PM-removebg-preview.png" style="height: 75px;" alt="شعار الموقع">
+    </div> 
+    </div>
+    <div class="header-title">
+      <h1>مشاكل التعليم في مصر وحلولها</h1>
+      <div class="subtitle">نحو تعليم أفضل لأجيال المستقبل</div>
+    </div>
+  </div>
+
+  <button class="about-btn" onclick="location.href='about_edutime.html'" style="height:60px; width:170px; font-size:24px;">
+    <i class="fa-solid fa-circle-info" style="font-size:40px; vertical-align:middle; margin-right:8px;"></i>
+    من نحن؟
+  </button>
+  
+</header>
+
+<div class="container">
+  <main>
+    <div class="card problems fade-in" id="problemsList">
+      <!-- سيتم تعبئة المشاكل بواسطة JS -->
+    </div>
+  </main>
+
+  <aside class="aside">
+    <div class="card" style="margin-bottom:20px">
+      <h3><i class="fa-solid fa-users"></i> اختار فئتك</h3>
+      <div class="persona" data-persona="student">
+        <div class="icon"><i class="fa-solid fa-user-graduate"></i></div>
+        <div>
+          <strong>طالب</strong>
+          <div style="font-size:14px;color:var(--muted)">نصائح للمذاكرة والأنشطة</div>
+        </div>
+      </div>
+      <div class="persona" data-persona="parent">
+        <div class="icon"><i class="fa-solid fa-people-roof"></i></div>
+        <div>
+          <strong>ولي الأمر</strong>
+          <div style="font-size:14px;color:var(--muted)">دعم ومتابعة</div>
+        </div>
+      </div>
+      <div class="persona" data-persona="teacher">
+        <div class="icon"><i class="fa-solid fa-chalkboard-user"></i></div>
+        <div>
+          <strong>معلم</strong>
+          <div style="font-size:14px;color:var(--muted)">طرق تدريس وتطوير مهني</div>
+        </div>
+      </div>
+
+      <div style="margin-top:20px">
+        <label style="display:block;font-size:14px;color:var(--muted);margin-bottom:8px">
+          <i class="fa-solid fa-magnifying-glass"></i> ابحث في المشاكل
+        </label>
+        <div class="searchRow">
+          <input id="searchInput" placeholder="اكتب كلمة (مثال: تكنولوجيا، امتحان، كثافة) ...">
+          <button class="btn" id="searchBtn"><i class="fa-solid fa-search"></i> بحث</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3><i class="fa-solid fa-bolt"></i> سريع</h3>
+      <p style="color:var(--muted);font-size:15px;line-height:1.7">
+        جرب الضغط على أي أيقونة مشكلة لفتح نافذة بها حلول ونصائح مخصصة — جرب مثلاً "ازدحام الفصول".
+      </p>
+      <div style="margin-top:15px;display:flex;gap:10px;flex-wrap:wrap">
+        <button class="btn secondary" id="btnExpandAll"><i class="fa-solid fa-expand"></i> فتح كل المشاكل</button>
+      </div>
+    </div>
+    
+<!-- مربع منفصل لزرار التحميل مع ألوانه في الستايل -->
+<div style="background-color:#b02434; color:white; border-radius:12px; padding:20px; display:flex; justify-content:center; align-items:center; box-shadow:0 4px 8px rgba(0,0,0,0.2); margin-top:20px;">
+  <a href="هنحط هنا ملف المجله" download style="background-color:white; color:#b02434; border:none; padding:10px 20px; border-radius:8px; font-weight:bold; text-decoration:none; cursor:pointer;">
+    <i class="fa-solid fa-download"></i> حمل المجلة !
+  </a>
+</div>
+
+    
+
+<!-- Modal -->
+<div class="modal" id="modal">
+  <div class="box card">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:15px">
+      <div>
+        <h3 id="modalTitle">تفاصيل المشكلة</h3>
+        <div id="modalSub" style="color:var(--muted);font-size:14px;margin-top:8px"></div>
+      </div>
+      <div style="display:flex;gap:10px;align-items:center">
+        <button class="close" id="modalClose"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+    </div>
+
+    <div id="modalContent" style="margin-top:20px"></div>
+
+    <hr style="margin:20px 0;border:none;border-top:2px solid rgba(45, 83, 2, 0.1)">
+
+    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+      <button class="btn" id="openStudentTips"><i class="fa-solid fa-user-graduate"></i> نصائح للطالب</button>
+      <button class="btn" id="openParentTips"><i class="fa-solid fa-people-roof"></i> نصائح لولي الأمر</button>
+      <button class="btn" id="openTeacherTips"><i class="fa-solid fa-chalkboard-user"></i> نصائح للمعلم</button>
+      <div style="flex:1;text-align:left;color:var(--muted);font-size:14px">اضغط على أي فئة لعرض نصائح موجهة للمشكلة.</div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <p>تواصل معنا عبر edutimecontactus@gmail.com</p>
+  <p>_____</p>
+  <p>© 2025 شركة المرعبين المحدودة – جميع الحقوق محفوظة </p>
+</footer>
+
+<script>
+/* ======== بيانات المشاكل + نصائح (10 مشاكل) ======== 
+   لكل مشكلة: id,title,summary,solutions,icons
+   لكل مشكلة: tips لكل فئة (student, parent, teacher) — مصفوفة بطول 2 (نصيحتين)
+*/
+
+const problems = [
+  {
+    id:1,
+    title:"ازدحام الفصول الدراسية",
+    summary:"كثرة عدد الطلاب في الفصل تقلل من المتابعة الفردية وجودة التعلم.",
+    solutions:["تقسيـم الفترات (صباحي/مسائي)؛ بناء فصول جديدة تدريجياً.","تطبيق التعليم المدمج ودعم المحتوى الرقمي لتخفيف الحضور اليومي."],
+    icon:"<i class='fa-solid fa-school'></i>",
+    tips:{
+      student:["انشئ مجموعات مذاكرة صغيرة لتقسيم الشرح والمراجعة.","اطلب من المعلم ملخصات وملاحظات مركزة بعد الدرس؛ راجعها أسبوعياً."],
+      parent:["تواصل مع المدرسة لطلب خطط تخفيف الكثافة أو حصص تقوية.","نظم وقت الطالب بالمنزل لتقليل الضغط وإعطاء وقت للدراسة المركزة."],
+      teacher:["استخدم استراتيجيات تعليم تفاضلية (Differentiation) داخل الفصل.","اعتمد أنشطة تفاعلية وتقسيم الفصل إلى مجموعات لزيادة المشاركة."]
+    }
+  },
+
+  {
+    id:2,
+    title:"ضعف المناهج التعليمية",
+    summary:"المناهج تميل للحفظ ولا تعطي فرص لتطبيق عملي أو تفكير نقدي.",
+    solutions:["مراجعة المناهج لإدماج مهارات التفكير النقدي والمشروعات.","إدخال وحدات تطبيقية وربط المواد بسوق العمل والمهارات الحياتية."],
+    icon:"<i class='fa-solid fa-book'></i>",
+    tips:{
+      student:["حاول ربط ما تتعلمه بمواقف عملية أو أمثلة من الحياة اليومية.","اطلب مشاريع صغيرة أو حالات تطبيقية من معلم المادة."],
+      parent:["شجع ابنك على القراءة خارج المنهج ومشروعات بسيطة في البيت.","اطرح أفكار لمشروعات مفيدة تربط المادة بالواقع المحلي."],
+      teacher:["قدم أنشطة قائمة على المشروعات لتطبيق المفاهيم.","شارك ملاحظاتك لدى إدارة المدرسة لاقتراح تطويرات عملية للمناهج."]
+    }
+  },
+
+  {
+    id:3,
+    title:"ضعف تدريب المعلمين",
+    summary:"قلة دورات التطوير المستمر تؤثر في جودة وأساليب التدريس.",
+    solutions:["تنظيم برامج تدريب دورية ومعتمدة للمعلمين.","تشجيع التبادل المهني وإنشاء مجتمعات ممارسة (PLC) بين المعلمين."],
+    icon:"<i class='fa-solid fa-chalkboard-teacher'></i>",
+    tips:{
+      student:["احترم أساليب المعلم وحفّز التعاون داخل الفصل.","قدّم ملاحظات بناءة للمعلم (ما الذي يساعدك في الفهم?)."],
+      parent:["ادعم مبادرات التطوير واطلب معلومات عن برامج تدريب المعلمين داخل المدرسة.","شارك الأفكار وادعم مشاركة المدرسة في ورش خارجية إن أمكن."],
+      teacher:["شارك في دورات قصيرة وارفع شهاداتك باستمرار.","كوّن مجموعة معلمين لتبادل الدروس والأفكار العملية داخل المدرسة."]
+    }
+  },
+
+  {
+    id:4,
+    title:"الاعتماد على الدروس الخصوصية",
+    summary:"الدروس الخاصة أصبحت بديلاً عن جودة الشرح داخل المدرسة وتسبب عبئًا ماديًا.",
+    solutions:["تقوية حصص الدعم داخل المدرسة وتوفير موارد مجانية.","تحسين جودة الشرح داخل الحصة وتقنيات التقييم المستمر."],
+    icon:"<i class='fa-solid fa-users-between-lines'></i>",
+    tips:{
+      student:["استغل موارد مجانية على الإنترنت لشرح النقاط الصعبة.","كوّن مجموعة دراسية بدل الاعتماد الكامل على الدروس الخاصة."],
+      parent:["قارن جودة المدرس الخصوصي بمخرجاته قبل الالتزام طويل الأجل.","اطلب من المدرسة حصص تقوية مجانية أو منخفضة التكلفة إن أمكن."],
+      teacher:["قدّم جلسات دعم بعد الدوام للطلاب المحتاجين بنظام منظم.","اختبر فهم الطلاب داخل الحصة لتقليل حاجة الدروس الخارجية."]
+    }
+  },
+
+  {
+    id:5,
+    title:"نقص الإمكانيات التكنولوجية",
+    summary:"بعض المدارس تفتقد حواسب، إنترنت أو معامل لتطبيق التعليم الحديث.",
+    solutions:["مشروعات لتجهيز مدارس نموذجية وبناء بنية تحتية رقمية.","استخدام حلول منخفضة التكلفة (لوحات رقمية بسيطة، محتوى offline)."],
+    icon:"<i class='fa-solid fa-laptop'></i>",
+    tips:{
+      student:["استخدم الهاتف بذكاء: تطبيقات تعليمية ومقاطع قصيرة تشرح الدرس.","اطلب من المدرسة تبادل موارد رقمية أو تحميل محتوى على USB."],
+      parent:["ادعم سبل الحصول على إنترنت أو أجهزة بسيطة بالمنزل إن أمكن.","شارك في مبادرات محلية لتجهيز فصل أو مكتبة رقمية بالمدرسة."],
+      teacher:["جهز دروس قابلة للتشغيل offline واحتفظ بمحتوى على USB.","اختر أدوات بسيطة وخفيفة تناسب إمكانيات المدرسة."]
+    }
+  },
+
+  {
+    id:6,
+    title:"الاهتمام بالامتحان فقط",
+    summary:"تقييم مبني على الاختبارات يجعل التعلم سطحيًا وقلقًا لدى الطلاب.",
+    solutions:["تنويع التقييم ليشمل مشاريع ومشاركات واستمرارية.","حوافز للمدارس التي تطبق تقييمًا متعدد الأبعاد."],
+    icon:"<i class='fa-solid fa-file-circle-check'></i>",
+    tips:{
+      student:["اعمل مشاريع صغيرة بدل حفظ طويل الأمد؛ ستفهم أفضل وتنجز بذكاء.","درب نفسك على عرض أفكارك شفوياً وكتابة تقارير بسيطة."],
+      parent:["لا تركز فقط على الدرجة؛ قيّم تطور ابنك وقدر الجهد.","شجع الأنشطة التي تظهر مهاراته الحقيقية (مشروعات، قيادة فريق)."],
+      teacher:["استخدم تقييم تشكيلي (Formative) واطلب أعمالًا تطبيقية.","اعرض معايير تقييم واضحة للطلاب لتهدئة القلق وتحفيز التعلم الحقيقي."]
+    }
+  },
+
+  {
+    id:7,
+    title:"التسرب من التعليم",
+    summary:"بعض الأطفال يتركون المدرسة بسبب ظروف اقتصادية أو اجتماعية.",
+    solutions:["برامج دعم مالي مشروطة وبرامج مرنة للتعليم.","حملات توعية ومبادرات لدمج الأطفال العائدين للمدارس."],
+    icon:"<i class='fa-solid fa-person-walking-luggage'></i>",
+    tips:{
+      student:["إن كان لديك ظروف عمل حاول التفاوض على جدول مرن مع المدرسة.","اطلب من المدرسة برامج مسائية أو دعم دراسي لتكملة التعليم."],
+      parent:["اطلب دعمًا حكوميًا/محليًا إن توفّر وشارك في حملات الدعم.","لا ترغم الطفل؛ ركّز على إقناعه بأهمية التعليم لمستقبله عمليًا."],
+      teacher:["حدد طلاب معرضين للتسرب وابعث تقارير للإدارة لطلب تدخل اجتماعي.","نظّم حملات تشجيعية ومشروعات صغيرة تشغل الطلاب وتجذبهم للمدرسة."]
+    }
+  },
+
+  {
+    id:8,
+    title:"عدم ربط التعليم بسوق العمل",
+    summary:"المهارات المطلوبة في السوق ليست متوافرة لدى الكثير من الخريجين.",
+    solutions:["توسيع التعليم الفني وبرامج تدريب عملي وشراكات مع الصناعة.","تشجيع مشروعات الطلاب وريادة الأعمال الجامعية."],
+    icon:"<i class='fa-solid fa-briefcase'></i>",
+    tips:{
+      student:["تعلم مهارات عملية خارج المنهج (تدريب، كورسات قصيرة).","ابحث عن تدريب صيفي حتى لو كان قصيرًا لتكتسب خبرة عملية."],
+      parent:["شجع ابنك على دخول الدورات التقنية أو التدريب مهني إن كانت ميوله لها.","ادعم فكرة مشروع صغير كخبرة عملية قبل الوظيفة."],
+      teacher:["ادعُ شركات محلية لإقامة ورش وتدريبات للطلاب.","ادرج مهام تطبيقية مرتبطة بالوظائف الحقيقية في مشاريع الطلاب."]
+    }
+  },
+
+  {
+    id:9,
+    title:"قلة الاهتمام بالأنشطة المدرسية",
+    summary:"الأنشطة الفنية والرياضية تُهمَل، مما يؤثر على التطور الشامل للطالب.",
+    solutions:["إدماج الأنشطة في الجدول المدرسي وتقييمها.","تشجيع النوادي والمشاركات المجتمعية كجزء من التقييم."],
+    icon:"<i class='fa-solid fa-basketball'></i>",
+    tips:{
+      student:["انضم لنادي مهما كان نوعه؛ تكتسب مهارات اجتماعية مهمة.","خصص وقتًا أسبوعيًا لهواية تحبها واحترم التوازن الدراسي-الترفيهي."],
+      parent:["ادعم مشاركة ابنك في أنشطة خارج المنهج وكن حاضرًا في مباريات أو عروضه.","لا تجعل النجاح الأكاديمي هو المعيار الوحيد لقيمته."],
+      teacher:["ابدأ ناديًا صغيرًا أو نشاطًا إبداعيًا بإمكانيات بسيطة.","ربط الأنشطة بمشروعات صغيرة تشجع على التعاون والقيادة."]
+    }
+  },
+
+  {
+    id:10,
+    title:"الفجوة بين التعليم الحكومي والخاص",
+    summary:"فرق واضح في الموارد وجودة المخرجات بين النظامين يخلق عدم مساواة.",
+    solutions:["تطبيق برامج دعم ونماذج شراكة لتقليص الفجوة.","رفع معايير أساسية في كل المدارس (تدريب معلم، بنية، مراجع)."],
+    icon:"<i class='fa-solid fa-chart-column'></i>",
+    tips:{
+      student:["استفد من موارد مجانية متاحة على الإنترنت لتعويض بعض الفجوات.","كون شبكة دعم مع زملاء من مدارس مختلفة لتبادل الموارد."],
+      parent:["طالب الإدارة ببرامج تحسين وشارك في لجان أولياء الأمور.","ادعم مبادرات شراكة بين المدرسة وقطاع الأعمال المحلي."],
+      teacher:["شارك مواردك وخبراتك مع مدارس أخرى وادعو لورش مشتركة.","اقترح مشاريع صغيرة لتبادل الخبرة بين المدارس."]
+    }
+  }
+];
+
+/* ======== render قائمة المشاكل ======== */
+const list = document.getElementById('problemsList');
+
+problems.forEach(p=>{
+  const el = document.createElement('div');
+  el.className = 'problem fade-in';
+  el.innerHTML = `
+    <div class="p-icon pulse">${p.icon}</div>
+    <div class="p-body">
+      <div class="p-title">${p.title}</div>
+      <div class="p-summary">${p.summary}</div>
+      <div class="p-actions">
+        <button class="btn" data-id="${p.id}" aria-label="فتح التفاصيل"><i class="fa-solid fa-eye"></i> عرض</button>
+        <button class="btn secondary" data-id-sol="${p.id}"><i class="fa-solid fa-list-check"></i> الحلول</button>
+        <button class="btn secondary" data-id-tips="${p.id}"><i class="fa-solid fa-hands-helping"></i> نصائح</button>
+      </div>
+    </div>
+  `;
+  list.appendChild(el);
+});
+
+/* ======== modal handling ======== */
+const modal = document.getElementById('modal');
+const modalTitle = document.getElementById('modalTitle');
+const modalSub = document.getElementById('modalSub');
+const modalContent = document.getElementById('modalContent');
+const modalClose = document.getElementById('modalClose');
+
+function openModal(){
+  modal.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(){
+  modal.style.display = 'none';
+  document.body.style.overflow = '';
+}
+modalClose.addEventListener('click', closeModal);
+modal.addEventListener('click', (e)=> { if(e.target===modal) closeModal(); });
+document.addEventListener('keydown', (e)=> { if(e.key==='Escape') closeModal(); });
+
+/* ======== عرض التفاصيل / الحلول / النصائح ======== */
+list.addEventListener('click', (e)=>{
+  const btn = e.target.closest('button');
+  if(!btn) return;
+  const id = Number(btn.dataset.id || btn.dataset.idSol || btn.dataset.idTips);
+  const p = problems.find(x=>x.id===id);
+  if(!p) return;
+
+  if(btn.dataset.id){ // فتح التفاصيل
+    modalTitle.innerHTML = `<i class="fa-solid fa-circle-info" style="margin-left:8px;color:var(--primary)"></i> ${p.title}`;
+    modalSub.textContent = p.summary;
+    modalContent.innerHTML = `
+      <h4 style="margin-top:6px; color: var(--primary)">أسباب</h4>
+      <ul style="color:var(--muted)"><li>ضغوط بنية تحتية وموارد غير كافية.</li><li>عوامل تنظيمية واجتماعية تخص كل منطقة.</li></ul>
+      <h4 style="color: var(--primary)">حلول مقترحة</h4>
+      <ul style="color:var(--muted)">${p.solutions.map(s=>`<li>${s}</li>`).join('')}</ul>
+      <div style="margin-top:10px;color:var(--muted)">اضغط على زر الفئة (طالب/ولي أمر/معلم) لعرض نصائح مخصصة لهذه المشكلة.</div>
+    `;
+    openModal();
+  } else if(btn.dataset.idSol){ // عرض الحلول بشكل منفصل (تركيز)
+    modalTitle.innerHTML = `<i class="fa-solid fa-wrench" style="margin-left:8px;color:var(--accent)"></i> حلول مقترحة — ${p.title}`;
+    modalSub.textContent = 'خطوات عملية يمكن اقتراحها أو تجربتها على المستويين المحلي والمدرسي.';
+    modalContent.innerHTML = `
+      <div class="tips-grid">
+        ${p.solutions.map((s, i)=>`<div class="tip"><div class="t-icon"><i class="fa-solid fa-lightbulb"></i></div><div><h4>حل عملي ${i+1}</h4><p>${s}</p></div></div>`).join('')}
+      </div>
+    `;
+    openModal();
+  } else if(btn.dataset.idTips){ // عرض تقسيم نصائح سريع مع أزرار الفئات
+    modalTitle.innerHTML = `<i class="fa-solid fa-hands-clapping" style="margin-left:8px;color:var(--accent)"></i> نصائح مُخصصة — ${p.title}`;
+    modalSub.textContent = 'اختر الفئة لعرض نصيحتين مباشرة متعلقتين بهذه المشكلة';
+    modalContent.innerHTML = `
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn" data-tip="${p.id}|student"><i class="fa-solid fa-user-graduate"></i> للطالب</button>
+        <button class="btn" data-tip="${p.id}|parent"><i class="fa-solid fa-people-roof"></i> لولي الأمر</button>
+        <button class="btn" data-tip="${p.id}|teacher"><i class="fa-solid fa-chalkboard-user"></i> للمعلم</button>
+      </div>
+      <div id="tipsArea" style="margin-top:12px"></div>
+    `;
+    openModal();
+  }
+});
+
+/* ======== التعامل مع زري النصائح داخل المودال ======== */
+modalContent.addEventListener('click', (e)=>{
+  const b = e.target.closest('button[data-tip]');
+  if(!b) return;
+  const payload = b.dataset.tip; // format: "id|persona"
+  const [idStr, persona] = payload.split('|');
+  const id = Number(idStr);
+  const p = problems.find(x=>x.id===id);
+  if(!p) return;
+  const arr = p.tips[persona] || [];
+  const tipsArea = document.getElementById('tipsArea');
+  tipsArea.innerHTML = `
+    <div class="tips-grid" style="margin-top:8px">
+      ${arr.map(t=>`<div class="tip"><div class="t-icon"><i class="fa-solid fa-check"></i></div><div><h4>${personaLabel(persona)}</h4><p>${t}</p></div></div>`).join('')}
+    </div>
+  `;
+});
+
+/* ======== أزرار الفئة في الفوتر داخل المودال (اختصار) ======== */
+document.getElementById('openStudentTips').addEventListener('click', ()=>{
+  fillModalWithPersonaTips('student');
+});
+document.getElementById('openParentTips').addEventListener('click', ()=>{
+  fillModalWithPersonaTips('parent');
+});
+document.getElementById('openTeacherTips').addEventListener('click', ()=>{
+  fillModalWithPersonaTips('teacher');
+});
+
+function fillModalWithPersonaTips(persona){
+  // عرض نصيحتين لكل مشكلة لفئة معينة (قائمة طويلة) — يسهل نسخها أو طباعتها
+  modalTitle.innerHTML = `<i class="fa-solid fa-user-check" style="margin-left:8px;color:var(--primary)"></i> نصائح موجهة لـ ${personaLabel(persona)}`;
+  modalSub.textContent = `نصيحتين لكل مشكلة (${problems.length} مشكلة). إجمالي ${problems.length*2} نصيحة.`;
+  modalContent.innerHTML = `
+    <div style="max-height:60vh;overflow:auto;padding-right:6px">
+      ${problems.map(p=>{
+        const arr = p.tips[persona]||[];
+        return `<div style="margin-bottom:12px">
+                  <h4 style="margin:0 0 6px; color: var(--primary)">${p.title}</h4>
+                  <div class="tips-grid">
+                    ${arr.map(t=>`<div class="tip"><div class="t-icon"><i class="fa-solid fa-lightbulb"></i></div><div><h4>نصيحة</h4><p>${t}</p></div></div>`).join('')}
+                  </div>
+                </div>`;
+      }).join('')}
+    </div>
+  `;
+  openModal();
+}
+
+/* ======== زر البحث ======== */
+document.getElementById('searchBtn').addEventListener('click', performSearch);
+document.getElementById('searchInput').addEventListener('keydown', (e)=>{ if(e.key==='Enter') performSearch(); });
+
+function performSearch(){
+  const q = document.getElementById('searchInput').value.trim();
+  if(!q) {
+    alert('اكتب كلمة للبحث');
+    return;
+  }
+  const matches = problems.filter(p=> (p.title + ' ' + p.summary + ' ' + p.solutions.join(' ')).toLowerCase().includes(q.toLowerCase()));
+  if(matches.length === 0){
+    modalTitle.textContent = 'لا توجد نتائج';
+    modalSub.textContent = `لم يتم العثور على "${q}"`;
+    modalContent.innerHTML = `<p style="color:var(--muted)">جرّب كلمات مفتاحية أخرى مثل "امتحان" أو "تقنية" أو "تدريب".</p>`;
+    openModal();
+  } else {
+    modalTitle.innerHTML = `<i class="fa-solid fa-magnifying-glass" style="margin-left:8px;color:var(--primary)"></i> نتائج البحث (${matches.length})`;
+    modalSub.textContent = `نتائج تطابق "${q}"`;
+    modalContent.innerHTML = `
+      ${matches.map(m=>`<div style="margin-bottom:12px">
+        <h4 style="margin:0 0 6px; color: var(--primary)">${m.title}</h4>
+        <p style="color:var(--muted);margin:0 0 6px">${m.summary}</p>
+        <div style="display:flex;gap:8px">
+          <button class="btn" data-id="${m.id}"><i class="fa-solid fa-eye"></i> عرض</button>
+          <button class="btn secondary" data-id-tips="${m.id}"><i class="fa-solid fa-hands-helping"></i> نصائح</button>
+        </div>
+      </div>`).join('')}
+    `;
+    openModal();
+  }
+}
+
+/* ======== أدوات مساعدة ======== */
+function personaLabel(key){
+  return {student:'الطالب',parent:'ولي الأمر',teacher:'المعلم'}[key]||key;
+}
+
+/* ======== أزرار جانبية ======== */
+document.getElementById('btnExpandAll').addEventListener('click', ()=>{
+  modalTitle.innerHTML = `<i class="fa-solid fa-list"></i> جميع المشاكل — لمحة سريعة`;
+  modalSub.textContent = 'عرض سريع لكل مشكلة وحلولها.';
+  modalContent.innerHTML = `
+    <div style="display:grid;gap:10px">
+      ${problems.map(p=>`<div style="padding:10px;border-radius:10px;background:#fbfdff;border:2px solid rgba(45, 83, 2, 0.1)">
+        <strong style="color: var(--primary)">${p.title}</strong>
+        <p style="color:var(--muted);margin:6px 0 0">${p.summary}</p>
+        <div style="margin-top:6px;color:var(--muted);font-size:13px">حل مختصر: ${p.solutions[0]}</div>
+      </div>`).join('')}
+    </div>
+  `;
+  openModal();
+});
+
+/* تحميل الصفحة (يحفظ نسخة محلية) */
+document.getElementById('btnDownload').addEventListener('click', ()=>{
+  // حفظ نسخة HTML الحالية (بسيطة)
+  const html = '<!doctype html>\n' + document.documentElement.outerHTML;
+  const blob = new Blob([html], {type: 'text/html;charset=utf-8'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'education_egypt_interactive.html';
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+});
+
+/* فتح نصائح بحسب اختيار الفئة من القائمة الجانبية */
+document.querySelectorAll('.persona').forEach(el=>{
+  el.addEventListener('click', ()=>{
+    const persona = el.dataset.persona;
+    fillModalWithPersonaTips(persona);
+  });
+});
+
+/* لأغراض تجربة: افتح أول مشكلة تلقائياً بعد تحميل الصفحة (يمكن إزالة) */
+window.addEventListener('load', ()=>{
+  // نتركها مغلقة — المستخدم يفضل أن يفتح بنفسه
+});
+</script>
+
+</body>
+</html>

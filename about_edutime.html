@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>عنّا</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #2d5302;
+      --primary-light: #4a7c1a;
+      --primary-dark: #1f3a01;
+      --accent: #ff9800;
+      --accent-light: #ffb74d;
+      --bg: #f8fbf3;
+      --card: #ffffff;
+      --muted: #5a6c5a;
+      --radius: 16px;
+      --shadow: 0 8px 26px rgba(45, 83, 2, 0.12);
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: 'Tajawal', 'Noto Naskh Arabic', sans-serif;
+      background: var(--bg);
+      color: #1a2c01;
+      text-align: center;
+      line-height: 1.6;
+      animation: fadeIn 1.2s ease;
+      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%232d5302' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    
+    header {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white;
+      padding: 25px 20px;
+      box-shadow: 0 4px 20px rgba(45, 83, 2, 0.3);
+      position: relative;
+      border-bottom: 4px solid var(--accent);
+    }
+    
+    .header-content {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    
+    .logos {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 25px;
+      margin-bottom: 20px;
+    }
+    
+    .logos img {
+      width: 100px;
+      height: auto;
+      border-radius: 18px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      animation: pulse 3s infinite;
+      border: 3px solid white;
+    }
+    
+    h1 {
+      font-size: 32px;
+      margin: 15px 0;
+      font-weight: 800;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+    }
+    
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      border: 2px solid white;
+      padding: 12px 25px;
+      font-size: 16px;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s;
+      backdrop-filter: blur(5px);
+      margin-top: 15px;
+    }
+    
+    .back-btn:hover {
+      background: white;
+      color: var(--primary);
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+    
+    main {
+      padding: 40px 20px;
+      width: 98%;
+      margin: 0 auto;
+    }
+    
+    .about {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 30px;
+      box-shadow: var(--shadow);
+      border-top: 5px solid var(--primary);
+      margin-bottom: 30px;
+      text-align: right;
+    }
+    
+    .about h2 {
+      color: var(--primary);
+      font-size: 26px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid rgba(45, 83, 2, 0.1);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      justify-content: flex-start;
+    }
+    
+    .about h2 i {
+      color: var(--accent);
+    }
+    
+    .about p {
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.8;
+      margin-bottom: 20px;
+      text-align: justify;
+    }
+    
+    .team-img {
+      display: flex;
+      justify-content: center;
+      margin: 30px 0;
+    }
+    
+    .team-img img {
+      width: 100%;
+      max-width: 500px;
+      border-radius: var(--radius);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+      opacity: 0;
+      transform: scale(0.9);
+      animation: zoomIn 1.2s ease forwards;
+      border: 4px solid var(--primary-light);
+    }
+    
+    .team-members {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-top: 30px;
+    }
+    
+    .member {
+      background: linear-gradient(180deg, #fff, #f9fbf3);
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: var(--shadow);
+      border: 2px solid rgba(45, 83, 2, 0.1);
+      transition: all 0.3s;
+    }
+    
+    .member:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(45, 83, 2, 0.15);
+      border-color: var(--primary-light);
+    }
+    
+    .member h3 {
+      color: var(--primary-dark);
+      margin-bottom: 10px;
+      font-size: 20px;
+    }
+    
+    .member p {
+      color: var(--muted);
+      font-size: 16px;
+      margin: 0;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    @keyframes fadeSlideIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+    
+    @keyframes zoomIn {
+      from {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+    
+    footer {
+      max-width: 900px;
+      margin: 40px auto 20px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 16px;
+      padding: 20px;
+      border-top: 2px solid rgba(45, 83, 2, 0.1);
+    }
+    
+    @media (max-width: 768px) {
+      .logos {
+        flex-direction: column;
+        gap: 15px;
+      }
+      
+      .logos img {
+        width: 80px;
+      }
+      
+      h1 {
+        font-size: 26px;
+      }
+      
+      .about {
+        padding: 20px;
+      }
+      
+      .about p {
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header style="display: flex; align-items: center; justify-content: space-between; padding: 20px 40px; background-color: #f5f5f5; border-bottom: 1px solid #ccc;">
+    <h1>عنّا - شركة المرعبين المحدودة</h1>
+    
+    <button class="back-btn" onclick="location.href='index.html'">
+      <i class="fa-solid fa-arrow-right"></i> العودة للصفحة الرئيسية
+    </button>
+  </header>
+  
+  
+  <main>
+    <section class="about">
+      <h2><img src="Screenshot_2025-09-14_190837-removebg-preview.png" alt="EDUTIME Logo" style="height: 60px;"> قصتنا</h2>
+      <p>نحن فريق <b>شركة المرعبين المحدودة</b>، مجموعة من الطلاب المتحمسين الذين اجتمعوا بهدف واحد: تحسين جودة التعليم في مصر. قائد فريقنا <b>يحيى</b> يقود هذا الفريق المتميز، وكلنا تعاونّا مع بعض لنعمل على مشروع متكامل يخدم بلدنا.</p>
+
+      <p>رؤيتنا هي تقديم حلول مبتكرة ومحتوى تفاعلي يساعد الطلاب والمعلمين وأولياء الأمور على بناء مستقبل أفضل للتعليم.</p>
+      
+      <p>عن فكرة مشروعنا "مجلة EduTime": رحلة خيالية تكشف حقيقة واقعية: التعليم هو مفتاح المستقبل.</p>
+      
+      <p>مرحبًا بكم في الإصدار الأول من مجلتنا EduTime، حيث نؤمن أن التعليم ليس مجرد مرحلة دراسية، بل هو الطريق الذي يصنع ملامح حياتنا ومستقبل أوطاننا.</p>
+      
+      <p>في هذا العدد، نأخذكم معنا في قصة رقمية بصرية ممتعة، تضم مجموعة من الطلاب الذين قرروا تحويل مفهوم "التعلم" من أسلوب تقليدي إلى رحلة إبداعية ملهمة. ومن خلال مغامرتهم اكتشفوا أن فكرة صغيرة اليوم يمكن أن تتحول إلى بذرة تغيّر مستقبل وطن كامل غدًا.</p>
+      
+      <p>مجلتنا هذه ليست مجرد أوراق للتصفح، بل هي دعوة صريحة لكل شاب وشابة للمشاركة الفاعلة: شاركوا أفكاركم، ابتكروا حلولًا جديدة، وكونوا جزءًا من صناعة التغيير.</p>
+      
+      <p>في الصفحات القادمة، ستجدون موضوعات تفتح آفاقًا واسعة: مقالات حول قوة التعليم في بناء المجتمعات، قصص نجاح طلاب تمكنوا من تحويل التحديات إلى فرص، وأفكار عملية تلهم أي شخص منا لبدء خطوته الأولى.</p>
+      
+      <p>نحن مؤمنون أن التعليم هو قوة، أمل، ومفتاح المستقبل… ونتطلع إلى أن تكونوا معنا خطوة بخطوة في هذه الرحلة الملهمة.</p>
+      
+      
+      <p>
+        نؤمن بأن التعليم هو أساس تقدم الأمم، ومن خلال هذا المشروع نهدف إلى المساهمة في تطوير النظام التعليمي 
+        في مصر عن طريق تحديد التحديات الرئيسية وتقديم حلول عملية يمكن تطبيقها على أرض الواقع.
+      </p>
+    </section>
+  
+    
+<section class="about">
+  <h2>
+    <img src="شركه المرعبين المحدوده لوجو.png" alt="Partners Logo" style="height: 70px;"> أعضاء الفريق
+  </h2>
+  
+  <div style="display: flex; flex-wrap: wrap; gap: 20px; width: 98%; margin: 0 auto;">
+    
+    <div style="flex: 1 1 calc(50% - 20px); display: flex; align-items: center; gap: 15px; background: #f9f9f9; padding: 10px; border-radius: 12px;">
+      <img src="5922293549796284732_119.jpg" alt="يحيى" style="width: 90px; height: 90px; border-radius: 50%; object-fit: cover; border: 2px solid #ccc;">
+      <div>
+        <h3>يحيى محمد السيد عطوه</h3>
+        <p>قائد فريق شركة المرعبين المحدودة</p>
+      </div>
+    </div>
+    
+    <div style="flex: 1 1 calc(50% - 20px); display: flex; align-items: center; gap: 15px; background: #f9f9f9; padding: 10px; border-radius: 12px;">
+      <img src="5922293549796284733_121.jpg" alt="نوران" style="width: 90px; height: 90px; border-radius: 50%; object-fit: cover; border: 2px solid #ccc;">
+      <div>
+        <h3>نوران محمد السيد عطوه</h3>
+        <p>عضو في فريق شركة المرعبين المحدودة</p>
+      </div>
+    </div>
+    
+    <div style="flex: 1 1 calc(50% - 20px); display: flex; align-items: center; gap: 15px; background: #f9f9f9; padding: 10px; border-radius: 12px;">
+      <img src="5922293549796284753_120.jpg" alt="هنا" style="width: 90px; height: 90px; border-radius: 50%; object-fit: cover; border: 2px solid #ccc;">
+      <div>
+        <h3>هنا علاء سعيد عطية</h3>
+        <p>عضو في فريق شركة المرعبين المحدودة</p>
+      </div>
+    </div>  
+    
+    <div style="flex: 1 1 calc(50% - 20px); display: flex; align-items: center; gap: 15px; background: #f9f9f9; padding: 10px; border-radius: 12px;">
+      <img src="5924545349609965488_121.jpg" alt="جومانه" style="width: 90px; height: 90px; border-radius: 50%; object-fit: cover; border: 2px solid #ccc;">
+      <div>
+        <h3>جومانه احمد لطفي الفقي</h3>
+        <p>عضو في فريق شركة المرعبين المحدودة</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+    
+    
+  <footer>
+    <p>© 2025 شركة المرعبين المحدودة – جميع الحقوق محفوظة </p>
+  </footer>
+</body>
+</html>
